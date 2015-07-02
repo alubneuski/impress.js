@@ -1,0 +1,635 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body {
+    font-family: 'PT Sans', sans-serif;
+    min-height: 740px;
+
+    background: rgb(215, 215, 215);
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 500, from(rgb(240, 240, 240)), to(rgb(190, 190, 190)));
+    background: -webkit-radial-gradient(rgb(243, 18, 18), rgb(190, 190, 190));
+    background:    -moz-radial-gradient(rgb(243, 18, 18), rgb(190, 190, 190));
+    background:     -ms-radial-gradient(rgb(243, 18, 18), rgb(190, 190, 190));
+    background:      -o-radial-gradient(rgb(243, 18, 18), rgb(190, 190, 190));
+    background:         radial-gradient(rgb(243, 18, 18), rgb(190, 190, 190));
+}
+
+/*
+    Now let's bring some text styles back ...
+*/
+b, strong { font-weight: bold }
+i, em { font-style: italic }
+
+/*
+    ... and give links a nice look.
+*/
+a {
+    color: inherit;
+    text-decoration: none;
+    padding: 0 0.1em;
+    background: rgba(255,255,255,0.5);
+    text-shadow: -1px -1px 2px rgba(100,100,100,0.9);
+    border-radius: 0.2em;
+
+    -webkit-transition: 0.5s;
+    -moz-transition:    0.5s;
+    -ms-transition:     0.5s;
+    -o-transition:      0.5s;
+    transition:         0.5s;
+}
+
+a:hover,
+a:focus {
+    background: rgba(255,255,255,1);
+    text-shadow: -1px -1px 2px rgba(100,100,100,0.5);
+}
+
+.fallback-message {
+    font-family: sans-serif;
+    line-height: 1.3;
+
+    width: 780px;
+    padding: 10px 10px 0;
+    margin: 20px auto;
+
+    border: 1px solid #E4C652;
+    border-radius: 10px;
+    background: #EEDC94;
+}
+
+.fallback-message p {
+    margin-bottom: 10px;
+}
+
+.impress-supported .fallback-message {
+    display: none;
+}
+
+.step {
+    position: relative;
+    width: 900px;
+    padding: 40px;
+    margin: 20px auto;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    -ms-box-sizing:     border-box;
+    -o-box-sizing:      border-box;
+    box-sizing:         border-box;
+
+    font-family: 'PT Serif', georgia, serif;
+    font-size: 48px;
+    line-height: 1.5;
+}
+
+.impress-enabled .step {
+    margin: 0;
+    opacity: 0.3;
+
+    -webkit-transition: opacity 1s;
+    -moz-transition:    opacity 1s;
+    -ms-transition:     opacity 1s;
+    -o-transition:      opacity 1s;
+    transition:         opacity 1s;
+}
+
+.impress-enabled .step.active { opacity: 1 }
+
+.slide {
+    display: block;
+
+    width: 900px;
+    height: 700px;
+    padding: 40px 60px;
+
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+
+    color: rgb(102, 102, 102);
+    text-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -1px;
+}
+
+.slide q {
+    display: block;
+    font-size: 50px;
+    line-height: 72px;
+
+    margin-top: 100px;
+}
+
+.slide q strong {
+    white-space: nowrap;
+}
+
+/*
+    And now we start to style each step separately.
+
+    I agree that this may be not the most efficient, object-oriented and
+    scalable way of styling, but most of steps have quite a custom look
+    and typography tricks here and there, so they had to be styled separately.
+
+    First is the title step with a big <h1> (no room for padding) and some
+    3D positioning along Z axis.
+*/
+
+#title {
+    padding: 0;
+}
+
+#title .try {
+    font-size: 64px;
+    position: absolute;
+    top: -0.5em;
+    left: 1.5em;
+
+    -webkit-transform: translateZ(20px);
+    -moz-transform:    translateZ(20px);9
+    -ms-transform:     translateZ(20px);
+    -o-transform:      translateZ(20px);
+    transform:         translateZ(20px);
+}
+
+#title h1 {
+    font-size: 190px;
+
+    -webkit-transform: translateZ(50px);
+    -moz-transform:    translateZ(50px);
+    -ms-transform:     translateZ(50px);
+    -o-transform:      translateZ(50px);
+    transform:         translateZ(50px);
+}
+
+#title .footnote {
+    font-size: 32px;
+}
+
+/*
+    Second step is nothing special, just a text with a link, so it doesn't need
+    any special styling.
+
+    Let's move to 'big thoughts' with centered text and custom font sizes.
+*/
+#big {
+    width: 600px;
+    text-align: center;
+    font-size: 60px;
+    line-height: 1;
+}
+
+#big b {
+    display: block;
+    font-size: 250px;
+    line-height: 250px;
+}
+
+#big .thoughts {
+    font-size: 90px;
+    line-height: 150px;
+}
+
+/*
+    'Tiny ideas' just need some tiny styling.
+*/
+#tiny {
+    width: 500px;
+    text-align: center;
+}
+
+/*
+    This step has some animated text ...
+*/
+#ing { width: 500px }
+
+/*
+    ... so we define display to `inline-block` to enable transforms and
+    transition duration to 0.5s ...
+*/
+#ing b {
+    display: inline-block;
+    -webkit-transition: 0.5s;
+    -moz-transition:    0.5s;
+    -ms-transition:     0.5s;
+    -o-transition:      0.5s;
+    transition:         0.5s;
+}
+
+/*
+    ... and we want 'positioning` word to move up a bit when the step gets
+    `present` class ...
+*/
+#ing.present .positioning {
+    -webkit-transform: translateY(-10px);
+    -moz-transform:    translateY(-10px);
+    -ms-transform:     translateY(-10px);
+    -o-transform:      translateY(-10px);
+    transform:         translateY(-10px);
+}
+
+/*
+    ... 'rotating' to rotate a quarter of a second later ...
+*/
+#ing.present .rotating {
+    -webkit-transform: rotate(-10deg);
+    -moz-transform:    rotate(-10deg);
+    -ms-transform:     rotate(-10deg);
+    -o-transform:      rotate(-10deg);
+    transform:         rotate(-10deg);
+
+    -webkit-transition-delay: 0.25s;
+    -moz-transition-delay:    0.25s;
+    -ms-transition-delay:     0.25s;
+    -o-transition-delay:      0.25s;
+    transition-delay:         0.25s;
+}
+
+/*
+    ... and 'scaling' to scale down after another quarter of a second.
+*/
+#ing.present .scaling {
+    -webkit-transform: scale(0.7);
+    -moz-transform:    scale(0.7);
+    -ms-transform:     scale(0.7);
+    -o-transform:      scale(0.7);
+    transform:         scale(0.7);
+
+    -webkit-transition-delay: 0.5s;
+    -moz-transition-delay:    0.5s;
+    -ms-transition-delay:     0.5s;
+    -o-transition-delay:      0.5s;
+    transition-delay:         0.5s;
+}
+
+/*
+    The 'imagination' step is again some boring font-sizing.
+*/
+
+#imagination {
+    width: 600px;
+}
+
+#imagination .imagination {
+    font-size: 78px;
+}
+
+/*
+    There is nothing really special about 'use the source, Luke' step, too,
+    except maybe of the Yoda background.
+
+    As you can see below I've 'hard-coded' it in data URL.
+    That's not the best way to serve images, but because that's just this one
+    I decided it will be OK to have it this way.
+
+    Just make sure you don't blindly copy this approach.
+*/
+#devnation {
+    width: 700px;
+    padding-bottom: 300px;
+
+    /* DevNation Icon */
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbgAAABLCAYAAAACu5KwAAAU3UlEQVR4Xu1dX6gf1RHeG0tNFUqaQE0vKDQSCzfBBhSbB5tUTGwfSh4tan3pg8WC0IeSKFREEJr4KhTsQ0FsK/VRLNTmSo3kIS0KqeReqOItVIh/aKIUtLHU3DI/7wl79+7ZM/PNnLO7d+cHcol79pyZ78zMd2b27Nm5qqpWK/85Ao6AI+AIOAKbDIE5J7hNNqOujiPgCDgCjsAMASc4NwRHwBFwBByBTYmAE9ymnFZXyhFwBBwBR8AJzm3AEXAEHIHCCNz+1a/MRgx/m8Of/uDD2f8KfwuLt2mG6yS4Q4cOZVd0cXHRfIyFhYVqfn7evN+hdZgDuy4dpbieP3++Wl5ejjpxCQeOBZBYQCk1x6Xk4o5TSu/UOLGAXlKPHKRC8t/79a9VB6/bXn3jy9emYFh3/e///rg69f7F6nf/eDcb4XHxzYFNXVmuHNzYESW4U6dOVQcOHBBNhKbxq6++Wp05c6Y6efJkpQncJ06cqI4ePaoRZTT3/mfpb9U1e/cVkRe1h8OHD1eX3ni9euWu26JyfudPfzV33F9+a6F6YPf1ImxyyNEUAJHrz+9dqA4vvibShQLF0/v3iIOpaJAMjSmY73nh9LqeTx66tbpj544Mo8W7/PnZt6rj51ZUYwZSk9phatBfvfWOGdkhdoLYY0onur505HaRvbbZSnOcVoKjzI2Ips/fk08+CZHd6uq03nognI4dO5Z1qjSLhiDf/3743aiMZKg/PrNkRnLktF2EGhMkl+OG8R7eu6t6Yt9uaK6ksiFECgmW4aY6uaBzaSHWF37zEtQNzfP9u+ZFwRoZyMJvUDuR2mNKP9Q3UguRwRJcAISylCM//Rk7q5sawRFOc3M0jfl+n5w7W31pzzehATgZHHVs6TBoULSUoQ0s6Qq12Yckw+wj64EMpOWmetBCA5+FLFKCI7t77OYbi2ebZLePv/E2tEDU2EmKXCRzgM5zSobBE5yU6KZIcEQimrJulyHSc7elpSWJra5rS+TLNd6UsXKFGCLBoTLVdabS1E/+ssyCQRO4WANkbDRGguPaeEbYKsR/NHbCKRFy9UXxS+k8GoILQNGzuoMHD0ZxmyLB5SxTWpQnJZmLdNXcZggomeTM4NBSUFM/Lj6awMUNSrnajY3grObWAk/JIojG09qJdLyYjk5wNWSobHnr3ffOdug1f1MkOMIgV5kS3VxCMnHLk2iWEnOWIRJc1zNISWBLrVhDX9rAJZHJuu2YCE6yeLPGKdafJLOysBNJ6dwJTmAFe/bs2UByUyW4HGVKTXky7PBEVrdahxkawaGr0zZX4GaZFoFL4IqmTcdCcEPGmEtyFjpwx+oyEtRHUgu+0ZUomyA1SW6qBJejTGlRnkQyF63DDI3gLIJI3e45CwDrMU0ZLNHZGAgOWbiVxJDG4pQPrewkRTQp3Z3gOhCql+emSnA5ypSa8iQtPLb/611ouz7ponGYIREcKktXQOBgYxW4UoEpx/WhE1yOOc2BI/WZWgxZ2Yn2lQUnuA4LqG88mTLBWZYpNeXJMB/aVS53Q0XTNNAAxC3/SYIR6rhdY3AyXKvAJdHVqu3QCW6Iz93Q53GWdqLxH9RPUou90Zcow8SG4D5lgrMsU/ZVnqw7KuowQyK4XMGw1MrcirQk/Qz5RW80EEv0t27bRQKWBMfJGGO6obhOhuDCpoYcBLf6+1/P5mV15c0N8zO366bq0t5bZv8ffRna0qCtdlP2WZ6s45EK5G3YDYXgUDk49pB6voIGDM7YudvU5zwnhl16xBZXloRAY7z83sUNL2iTznfu3G72wnhXxm+pT8ATqbyg9lqc4CiL4P72799vet4lZXFWR4wRqV0+/XJVfXSBq05VbdtRzc1fX3165J7eyM6iTGlRnrR0HKnDoEERzRhjBqIt0aYML4ULBQ0KlMhv/pqt8FFThCP6azuRg+YzdgjvDdduFZ85GmSj4Bj7tZ1DidpVc4xUUK63RwN/c8zYQtHST8OYqcVXG+aonikszUuUSAZhdfYlZXEWWRT188Xj+vMd5xb2VSHD48hFpEpZooYgLcqUmvJkIFhk92Qs2EgdBg1E1gRniUEbNkh2yyUeFEPqP0W8XBk47UrKiQbhoAe6EQM5ELmJXcyHchAcjS21TRTbURBcmAxNYOU4A7fNLHt78Xluc367tQyPbiDiCyXP1fPvfJ4pbtsx+0vEuOWR4/x+Gy2RRUa9C2158siWS/ChwjGlJQ6DBj1LgkNlkEy6pbzNcTXyb1aC05ABSm71edEsmGJlSo1OXbbK2QhlkamOiuBIYU1wlQSHrrbZCI4r4LYd1VVP/ZbbekM7TZnSojyZY2OFxGHQ4GxJGLkCR3Oyc5EJiuFmzuA0BCNZoMUcXzMnsXnJaacp8pkkwQ2B5HonuKqq/vvwCbjcqilTasrFOcqTdSfgOgwaCKwIDh0fWdFwMZH2rdEhF+m26VBSTpTgJIuz1DxpFo9tJJuT4CRZ6yRKlGFyNUE2ZSCc65d/8XC1unyW0zRbmy3fv7ua+8GP4P7RMqUmg6Yxc26s4AYKNOhZERzqrKQf8rXn5gdCYaOp3YhiuFkzOA0elosQ1LZoXkoTHI3J9SlUrxS2g9hk0uaQObb7cx1/CARHz+P6KFOiuIesUbPC5MwPx2HQYMTpmyMjsiomcnt25Tz07NKi/NXUC8XQCW6jhVjOj2Ze+iC4GLE2UZocwWkyCU4Q6mrz2UP3yV4P0A4Yub90mVKTOSNfDkBhSwUMNAhYEBw6dliJImUw6S5TDu6oHk5wTnBNBDiVl8kRXJ87Kj+7/3ucGJC9jaZMGV58lwiJLirCWJqgKJEz5TCoHBYEh5ZoA2mj2Z91mRLF0AluoyVbP5NEFkF9lSgDGqlSohOcJAIq264juLWt/fUTS+rdbz33+uyf4pfCGTJqXxdo+5xQ17Da8qQmKDLgWNeky2FQOSwIDgk+dcJGHT2V1UrxRTF0gnOCi9lal42idp8izsE+g+srg6Ns5OoXnpu9pybd5EH30o/ut9qkctWzf5TGpivtJbspNeXJQKSaoIgoGXMYVA4twaHjNp0UIUnrMiWqixOcE1zMl7v8ywkOiYA93xNOJtGQXakyJVqerH/JQRMUkamKOQwqh5bgkPJiGyFY9YNgGu5BMXSCc4LrsrtYxuUEp/HWAdx7hezCqSUxmeg0E/qtnWxCZ1tqTjXhlim15UkSWRMU0SlqcxhUDi3BIZlX2/PEXM4uwRjF0AnOCS5lZ23PJHPZvJcoU7OR6XooZ9a7D+dVNs/CzF2mtChP9kVwbQSBBmcNwVk7KEKWGvmbZo5i6ATnBJcKmW12au0/QQYnuNRs9HC9SXCa1wU4uyktypNagqNnSA/svh5Cu/n8CQ3OGoJAy4rWp7xbbTZBMXSCmwbB0cKSftKDCQI6TTt1goNC33hvqr9snns3JVqebJ55qQ2KSNbS5jCoHCjB5Rgvl8NzPQLVyQluGgRHvkKfNnrlrtu4JrWuXbPyksvePYODpif/TevOw1SeatK1m9KqPKnN4KgurwmqdYdB+0EJLpdzIoSfekeQa7kohk5w0yG4w4uvVWjlglCqPz/P5UNOcFyPL9yuVJkSfR2jvnsyQGMRFC0cBpUDJTj0eLLUC8AoFhZlShRDJ7hpERxpiyzEmpUXJ7jCBDOE4epHhmleFyBdYrsprcqTFhmcto9wejn1g5ROEIJDiYAzFur0Fu/EoXo5wU2P4FA7JaSCH6B9+IveBkwVdjyGU0uaXV7aewv8aZsu8XKXKTXlybavFVgFRdTYg8OgzwY4pNOcL/RorpRjhnHQ1XEqO0y5hdVcpsbRXi8lZ6lxOHigNmF52HLTV9AqRihV0t8n9u3mqL+uTcqPvEQZgTScaHLla9sM6GkzSDjSK2z5Z9wWbZK7TImWJ2PP9CyDgMZh0B2ZCMGhwYZLQGiZMuX4Kbu0nMvUWJrrpeQsNQ4HC9TmchKcBh+qvJx6/yK0izpl505wDYsy+1TOth3VltvvrLTZXf1cTOsyJVqejJU7NUbeDPiavjhBoq2NlODQTFMyDoqDtkyJjuslyumVKIPGaDUD9deQ/R0/txLtwgmuBk0zY9IAv+7etQObPz1yD7uUeSWDrH14Vfu6QD3zQsuTXe/VWQfF0g4jIR6a31LZFbpi52aJbXZuPZdmvtToqJScpcbh4ITaQ84MLsitqbxwdG+28QxOgNq6Z16C+8RNa18oqN+7uvLm7J9dZ1dqTjWpk5N1eZLkzhEEUGcWz4ng68O5dI3JjBJ9yvm7MMoxl8icpO4pJWepcVL60nXUJ0oQnAYnju5OcAhKa/cUIziFjJpTTWjYUF60Lk/mCvpoGRCBWJLBoXKFL3dL5Ltz5/bqjp1rZ5QKbtS8E6cJVJrMUaDerGkpOUuNw9F/yARH8qOVDY7uTnAISiMiOIsy5cmTJyv6T/pre/et3keuIFDKYSQEV7oUI52r0B59Jy7XXKJ6xO4rJWepcTj4DJ3gCKun9++Bj/HiYBDapKoU/gyuhqbZBhPJDAFttWXKp/7wUnX06FHxyKnvy+UKApp+JUpyCa6UPBLZY23RzSYaHT2DWz8b1ngMneBIe7TCIbX50RIcegCwFKB6+7EQnLZMSc/ikNcYUp/eyRkUSzgMl+DQZ2Ia20TvRcuUOecS1aXtvlJyasZBs2hrfUs8g6vLXKLKMVqCQ58RaZxnLASnLVMiGKXKk9SnJghwVrm5HYZLcOgKGsHd4h4kwOaeSwu9SthckFODB4J/jpJsaYLTYMa1j1ESHLqFnQtKrF39aCxtX1nvVx6+jMjW/HKA9eqSQ3C5HYZDcCUySWR+uu5BypQarDlzaaVjKTk146SCsAQLjf2VJjjSK3e1I4XtIJ/B9ZG90WTUX6qmf1OmNPu766bZX3ppu/4LR3dxtvdLjJjTVlum5IxRb/Pt67ZXpz/4sPM2TRDgBsWcG044BJfbYaXzwm3PxdciY5GOxdWhj0VVfUw0c0fLxG36aqoYfRAc6YDixrGL0RHcJ+fOQs+HOGCk2lCJUnvUFj3fIuK7fPrlqvroQmpI+Lr2VBPJwKnNJaWDYi6HSRGchsAleOdomwoEzTE1ujrBbZxBizKlZk5IorZ5QReMKV+pI6DJOlO+kLLrwWRwVJZ89NFHqwMHDqR0Gs31cEjz1S88V0nOtNyg4NqxX/T/L7/4/OeXC5YpOeVJEknjgJKgmMthUk6ba9wSBi3NIkrNpVb3knKiZBB0lNh4Gy6ahV1s/lGdUr7SlB8dJ2Ufgyc4IjYKoMi29abytBFiyAQZsjuSm8qaraRXO+UklETDjsfmUWKa1wVShlO/3vblgLb7SwYbTakmpnvKaXOMKZkHbVtJgC05lxq9SsqpXeCEzzmlSv1t2bT2vbLYc1iUeFK+YlkR6LKP4gRHJMP9WZMRESXyAjNX3iG0szx8maMPtzxZMoPTjoUQnCaQcnAu0SYVDOoyaPSVEClXb5IntqhCPrNCfVHZMPZrIyENJvVxJPNApHr/rnn1S9OxEmkpgiP9tQuEtrlKYWleouQarHW7cM5iXxtUrPWJ9Vd/laHE6wKpd9/6DIrWGz66VqXWY5Wyl/o4kjKlJphbElzJUzE4WFlm8ZRV/fPjSxs2b5HON1y7Ffp8TJtddc17SYIj2Szxo/4mQ3DhOdFmJ7iSZcquLwfEVtPIl7SpLzQoap5LNHXoIjhrx+yD4ELWwimRDYXgcqz6udi3ZT19ysOVu9muiwRKE5zGriabwdXLaJud4GiSS5UpJeVJkktjvCjBacbkEpxmjLBKR4NT7D60LMd9J06jMzqXbbr2SSixst6YFjuprL00wdEco2NOkuDomd+DDz5YLS8vz/SfAsFdKVOubUjZ8shx6/g5609SnuyL4CwdJpbBoQ6ZCi6aSdOUTDkE5AT3+TO6nM/iNPPPvTf1egJq29JNJk15rSovm7pE2VZCmwLBrfusT6bXBThHczWNtq+gaPWcJua0qDNysyVusKq302CdCgp9LlaaWAwxgyMZNQsMZL6Rezj21xfBWc1rypZHu8mkmbkFA5gCwTXLlDlONZGWJ/sOihYO00Zwmn5Tq2ckaNXvQUtlnMCnIVBOhsjVXYM/d4xYu9T8ofhr5eLcz60e9EVwpIMFfpuS4Lqyi8kQ3EP3XTkpJcduSml5sm+Cs3CYNoJDnZAbYDjBKtZGk0WkgrcTXLxEabHI0Mx76l6J7fVJcBobCxhsKoKjkiR9y+zYsWPROZ4KweUsUyLlySEQnNZh2ggOLU+mHC8VpDjXNfqm5NP0PZUMLswRShKcOZa2kT4bQ2WXjpNjkUZ9pux4NCVKKpk988wzVzaTxACbCsE1XxewLFNyj+ZqzsEQgqImq2k6raYvyyDfFeRyBaghzCXpPeQSZX1e+pSTm8202VEu+5EQM7qI3BQExyW2AOhUCI70zfW6AOfLAW0GPJSgiDpMk+DQ8qTV6pYTJDSBtatMOZS51OjHwa+rTaqM27bA0x6phciMHgFGYw2B4DS2BmVwCwsL1dLSEoK1yT1UIjtz5kxnKXLqGVyT4KwOX0Y2l9TnAiEXa0JAHaYuB9oHZ1Vp4iRrneSSU9OvZfY6JoIL82p1vFbKTojYnl05Xx0/t5JqGr2OVilSxCIVCCXalBytJUoS7sSJEyYHIKcUDWdXEqHROZKLi4upWzqv9/WxVJXQwM3rnsGt3a/dbKIlNxIDCUjSlTIHLiRAN+VAyJqzQ5Ejv6QNgjn1n8IdCTrW+lu9AiLBk9pKNmrE+ibZH7v5xuqOnTukw3e2p4XY42+8nfw+I2dQxE80GWOXTFJ748xRlOA44HgbR2DoCJADc36x46u494cxOMdgceRB2uSQNUefJXRDxqjfYz2PtAih8yUPXrddfHAyBfJT71+cnVupyda6MJHMszU2dbms5XCC03qC3+8IOAKOgBABCuSpYE5EkpNMhCKPsrkT3CinzYV2BBwBR8ARSCHgBJdCyK87Ao6AI+AIjBIBJ7hRTpsL7Qg4Ao6AI5BCwAkuhZBfdwQcAUfAERglAk5wo5w2F9oRcAQcAUcghYATXAohv+4IOAKOgCMwSgSc4EY5bS60I+AIOAKOQAoBJ7gUQn7dEXAEHAFHYJQI/B8pz7nxmWDjywAAAABJRU5ErkJggg==);
+    background-position: bottom right;
+    background-repeat: no-repeat;
+}
+
+#source q {
+    font-size: 60px;
+}
+
+/*
+    And the "it's in 3D" step again brings some 3D typography - just for fun.
+
+    Because we want to position <span> elements in 3D we set transform-style to
+    `preserve-3d` on the paragraph.
+    It is not needed by webkit browsers, but it is in Firefox. It's hard to say
+    which behaviour is correct as 3D transforms spec is not very clear about it.
+*/
+#its-in-3d p {
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style:    preserve-3d; /* Y U need this Firefox?! */
+    -ms-transform-style:     preserve-3d;
+    -o-transform-style:      preserve-3d;
+    transform-style:         preserve-3d;
+}
+
+/*
+    Below we position each word separately along Z axis and we want it to transition
+    to default position in 0.5s when the step gets `present` class.
+
+    Quite a simple idea, but lot's of styles and prefixes.
+*/
+#its-in-3d span,
+#its-in-3d b {
+    display: inline-block;
+    -webkit-transform: translateZ(40px);
+    -moz-transform:    translateZ(40px);
+    -ms-transform:     translateZ(40px);
+    -o-transform:      translateZ(40px);
+     transform:        translateZ(40px);
+
+    -webkit-transition: 0.5s;
+    -moz-transition:    0.5s;
+    -ms-transition:     0.5s;
+    -o-transition:      0.5s;
+    transition:         0.5s;
+}
+
+#its-in-3d .have {
+    -webkit-transform: translateZ(-40px);
+    -moz-transform:    translateZ(-40px);
+    -ms-transform:     translateZ(-40px);
+    -o-transform:      translateZ(-40px);
+    transform:         translateZ(-40px);
+}
+
+#its-in-3d .you {
+    -webkit-transform: translateZ(20px);
+    -moz-transform:    translateZ(20px);
+    -ms-transform:     translateZ(20px);
+    -o-transform:      translateZ(20px);
+    transform:         translateZ(20px);
+}
+
+#its-in-3d .noticed {
+    -webkit-transform: translateZ(-40px);
+    -moz-transform:    translateZ(-40px);
+    -ms-transform:     translateZ(-40px);
+    -o-transform:      translateZ(-40px);
+    transform:         translateZ(-40px);
+}
+
+#its-in-3d .its {
+    -webkit-transform: translateZ(60px);
+    -moz-transform:    translateZ(60px);
+    -ms-transform:     translateZ(60px);
+    -o-transform:      translateZ(60px);
+    transform:         translateZ(60px);
+}
+
+#its-in-3d .in {
+    -webkit-transform: translateZ(-10px);
+    -moz-transform:    translateZ(-10px);
+    -ms-transform:     translateZ(-10px);
+    -o-transform:      translateZ(-10px);
+    transform:         translateZ(-10px);
+}
+
+#its-in-3d .footnote {
+    font-size: 32px;
+
+    -webkit-transform: translateZ(-10px);
+    -moz-transform:    translateZ(-10px);
+    -ms-transform:     translateZ(-10px);
+    -o-transform:      translateZ(-10px);
+    transform:         translateZ(-10px);
+}
+
+#its-in-3d.present span,
+#its-in-3d.present b {
+    -webkit-transform: translateZ(0px);
+    -moz-transform:    translateZ(0px);
+    -ms-transform:     translateZ(0px);
+    -o-transform:      translateZ(0px);
+    transform:         translateZ(0px);
+}
+
+/*
+    The last step is an overview.
+    There is no content in it, so we make sure it's not visible because we want
+    to be able to click on other steps.
+
+*/
+#overview { display: none }
+
+/*
+    We also make other steps visible and give them a pointer cursor using the
+    `impress-on-` class.
+*/
+.impress-on-overview .step {
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+/*
+    Now, when we have all the steps styled let's give users a hint how to navigate
+    around the presentation.
+
+    The best way to do this would be to use JavaScript, show a delayed hint for a
+    first time users, then hide it and store a status in cookie or localStorage...
+
+    But I wanted to have some CSS fun and avoid additional scripting...
+
+    Let me explain it first, so maybe the transition magic will be more readable
+    when you read the code.
+
+    First of all I wanted the hint to appear only when user is idle for a while.
+    You can't detect the 'idle' state in CSS, but I delayed a appearing of the
+    hint by 5s using transition-delay.
+
+    You also can't detect in CSS if the user is a first-time visitor, so I had to
+    make an assumption that I'll only show the hint on the first step. And when
+    the step is changed hide the hint, because I can assume that user already
+    knows how to navigate.
+
+    To summarize it - hint is shown when the user is on the first step for longer
+    than 5 seconds.
+
+    The other problem I had was caused by the fact that I wanted the hint to fade
+    in and out. It can be easily achieved by transitioning the opacity property.
+    But that also meant that the hint was always on the screen, even if totally
+    transparent. It covered part of the screen and you couldn't correctly clicked
+    through it.
+    Unfortunately you cannot transition between display `block` and `none` in pure
+    CSS, so I needed a way to not only fade out the hint but also move it out of
+    the screen.
+
+    I solved this problem by positioning the hint below the bottom of the screen
+    with CSS transform and moving it up to show it. But I also didn't want this move
+    to be visible. I wanted the hint only to fade in and out visually, so I delayed
+    the fade in transition, so it starts when the hint is already in its correct
+    position on the screen.
+
+    I know, it sounds complicated ... maybe it would be easier with the code?
+*/
+
+.hint {
+    /*
+        We hide the hint until presentation is started and from browsers not supporting
+        impress.js, as they will have a linear scrollable view ...
+    */
+    display: none;
+
+    /*
+        ... and give it some fixed position and nice styles.
+    */
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 200px;
+
+    background: rgba(0,0,0,0.5);
+    color: #EEE;
+    text-align: center;
+
+    font-size: 50px;
+    padding: 20px;
+
+    z-index: 100;
+
+    /*
+        By default we don't want the hint to be visible, so we make it transparent ...
+    */
+    opacity: 0;
+
+    /*
+        ... and position it below the bottom of the screen (relative to it's fixed position)
+    */
+    -webkit-transform: translateY(400px);
+    -moz-transform:    translateY(400px);
+    -ms-transform:     translateY(400px);
+    -o-transform:      translateY(400px);
+    transform:         translateY(400px);
+
+    /*
+        Now let's imagine that the hint is visible and we want to fade it out and move out
+        of the screen.
+
+        So we define the transition on the opacity property with 1s duration and another
+        transition on transform property delayed by 1s so it will happen after the fade out
+        on opacity finished.
+
+        This way user will not see the hint moving down.
+    */
+    -webkit-transition: opacity 1s, -webkit-transform 0.5s 1s;
+    -moz-transition:    opacity 1s,    -moz-transform 0.5s 1s;
+    -ms-transition:     opacity 1s,     -ms-transform 0.5s 1s;
+    -o-transition:      opacity 1s,      -o-transform 0.5s 1s;
+    transition:         opacity 1s,         transform 0.5s 1s;
+}
+
+/*
+    Now we 'enable' the hint when presentation is initialized ...
+*/
+.impress-enabled .hint { display: block }
+
+/*
+    ... and we will show it when the first step (with id 'standard') is active.
+*/
+.impress-on-standard .hint {
+    /*
+        We remove the transparency and position the hint in its default fixed
+        position.
+    */
+    opacity: 1;
+
+    -webkit-transform: translateY(0px);
+    -moz-transform:    translateY(0px);
+    -ms-transform:     translateY(0px);
+    -o-transform:      translateY(0px);
+    transform:         translateY(0px);
+
+    /*
+        Now for fade in transition we have the oposite situation from the one
+        above.
+
+        First after 4.5s delay we animate the transform property to move the hint
+        into its correct position and after that we fade it in with opacity
+        transition.
+    */
+    -webkit-transition: opacity 1s 5s, -webkit-transform 0.5s 4.5s;
+    -moz-transition:    opacity 1s 5s,    -moz-transform 0.5s 4.5s;
+    -ms-transition:     opacity 1s 5s,     -ms-transform 0.5s 4.5s;
+    -o-transition:      opacity 1s 5s,      -o-transform 0.5s 4.5s;
+    transition:         opacity 1s 5s,         transform 0.5s 4.5s;
+}
+
+/*
+    And as the last thing there is a workaround for quite strange bug.
+    It happens a lot in Chrome. I don't remember if I've seen it in Firefox.
+
+    Sometimes the element positioned in 3D (especially when it's moved back
+    along Z axis) is not clickable, because it falls 'behind' the <body>
+    element.
+
+    To prevent this, I decided to make <body> non clickable by setting
+    pointer-events property to `none` value.
+    Value if this property is inherited, so to make everything else clickable
+    I bring it back on the #impress element.
+
+    If you want to know more about `pointer-events` here are some docs:
+    https://developer.mozilla.org/en/CSS/pointer-events
+
+    There is one very important thing to notice about this workaround - it makes
+    everything 'unclickable' except what's in #impress element.
+
+    So use it wisely ... or don't use at all.
+*/
+.impress-enabled          { pointer-events: none }
+.impress-enabled #impress { pointer-events: auto }
+
+/*
+    There is one funny thing I just realized.
+
+    Thanks to this workaround above everything except #impress element is invisible
+    for click events. That means that the hint element is also not clickable.
+    So basically all of this transforms and delayed transitions trickery was probably
+    not needed at all...
+
+    But it was fun to learn about it, wasn't it?
+*/
+
+/*
+    That's all I have for you in this file.
+    Thanks for reading. I hope you enjoyed it at least as much as I enjoyed writing it
+    for you.
+*/
